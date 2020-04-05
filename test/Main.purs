@@ -2,11 +2,11 @@ module Test.Main where
 
 import Prelude
 import Data.Foldable (sum)
-import Data.Iterator (Iterator, empty, fromArray, next, range, singleton, toArray)
+import Data.Iterator (Iterator, empty, fromArray, iterate, next, range, singleton, toArray)
 import Data.Tuple (fst)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
-import Test.QuickCheck ((===))
+import Test.QuickCheck ((===), (/==))
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.QuickCheck (quickCheck)
@@ -23,6 +23,7 @@ main =
           it "has singleton iterators size 1" $ quickCheck \(x :: Int) -> (count $ singleton x) === 1
           it "has singleton iterators of the right value" $ quickCheck \(x :: Char) -> (fst <<< next $ singleton x) === x
           it "converts from/to array" $ quickCheck \(arr :: Array String) -> toArray (fromArray arr) === arr
+          it "iterates over a function wihout producing the seed" $ quickCheck \f (seed :: Int) -> seed /== (fst <<< next $ iterate f seed)
           it "generates cartesian products from Monad"
             $ 1000
                 `shouldEqual`
