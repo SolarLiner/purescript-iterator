@@ -1,6 +1,6 @@
 {
   "name": "purescript-iterator",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,8 @@
     "build": "concurrently yarn:build:*",
     "build:purs": "spago build -x",
     "build:docs": "spago docs",
-    "test": "spago test -x"
+    "test": "spago test -x",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -19,7 +20,8 @@
     "concurrently": "^5.1.0",
     "git-cz": "^4.3.1",
     "husky": "^4.2.3",
-    "spago": "^0.14.0"
+    "spago": "^0.14.0",
+    "standard-version": "^7.1.0"
   },
   "husky": {
     "hooks": {
