@@ -116,7 +116,12 @@ dist
 
 # PureScript
 
-output
-.spago
-.purs-ide-port
-.purs-repl
+/bower_components/
+/.pulp-cache/
+/output/
+/generated-docs/
+/.psc-package/
+/.psc*
+/.purs*
+/.psa*
+/.spago
