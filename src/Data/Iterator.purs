@@ -1,4 +1,4 @@
-module Data.Iterator (Iterator, next, iterate, iterate', forEach, isDone, empty, singleton, concat, concat', take, range, fromArray, toArray) where
+module Data.Iterator (Iterator, next, iterate, iterate', forEach, isDone, empty, singleton, concat, concat', take, range, range', fromArray, toArray, repeat, (..)) where
 
 import Prelude
 import Data.Foldable (class Foldable)
@@ -32,6 +32,8 @@ foreign import fromArray :: forall a. Array a -> Iterator a
 
 foreign import toArray :: forall a. Iterator a -> Array a
 
+foreign import repeat :: forall a. a -> Iterator a
+
 next :: forall a. Iterator a -> Tuple a (Maybe (Iterator a))
 next iter = Tuple value $ if done then Nothing else Just iter
   where
@@ -39,6 +41,11 @@ next iter = Tuple value $ if done then Nothing else Just iter
 
 iterate' :: forall a. Monoid a => (a -> a) -> Iterator a
 iterate' pred = iterate pred mempty
+
+range' :: forall a. Eq a => Semiring a => a -> a -> Iterator a
+range' = range ((+) one)
+
+infixl 8 range' as ..
 
 instance functorIterator :: Functor Iterator where
   map = mapImpl

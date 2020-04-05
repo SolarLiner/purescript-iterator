@@ -62,6 +62,8 @@ exports.fromArray = array => applyGen(function* fromArray() {
 
 exports.toArray = generator => Array.from(generator);
 
+exports.repeat = value => applyGen(function* repeat() { while (true) yield value; });
+
 /**
  * @param {Generator} generator
  */
